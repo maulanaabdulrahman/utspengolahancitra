@@ -1,0 +1,232 @@
+:root {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #e9ecef;
+  --bg-tertiary: #dee2e6;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --accent-primary: #495057;
+  --accent-secondary: #6c757d;
+  --hover: #343a40;
+  --border: #ced4da;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar {
+  background-color: var(--bg-secondary);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-weight: 500;
+  font-size: 1.2em;
+  color: var(--accent-primary);
+  letter-spacing: 1px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.canvas-area {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.controls-panel {
+  width: 250px;
+  background-color: var(--bg-primary);
+  padding: 15px;
+  overflow-y: auto;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.control-group {
+  margin-bottom: 15px;
+  background-color: var(--bg-secondary);
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.control-title {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--accent-primary);
+  font-size: 0.9em;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  flex-grow: 1;
+  -webkit-appearance: none;
+  width: 100%;
+  background: var(--bg-tertiary);
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  margin: 8px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-secondary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-value {
+  width: 30px;
+  text-align: right;
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+
+.canvas-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.btn {
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  background-color: transparent;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.flip-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flip-button {
+  background-color: var(--bg-tertiary);
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  flex: 1;
+  margin: 0 4px;
+  font-size: 0.8em;
+}
+
+.flip-button:hover {
+  background-color: var(--accent-secondary);
+  color: var(--bg-primary);
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 20px;
+  background-color: var(--bg-tertiary);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  background-color: var(--bg-primary);
+  transition: transform 0.3s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--accent-secondary);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
