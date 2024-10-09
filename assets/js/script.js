@@ -32,6 +32,15 @@ new Vue({
     onFileChange(e) {
       const file = e.target.files[0];
       if (file) {
+        const fileSizeMb = file.size / (1024 * 1024);
+        if(fileSizeMb > 1) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ukuran gambar maksimal adalah 1MB",
+          });
+          return
+        }
         const reader = new FileReader();
         reader.onload = (f) => {
           fabric.Image.fromURL(f.target.result, (img) => {
