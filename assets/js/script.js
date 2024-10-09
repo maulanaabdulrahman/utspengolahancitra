@@ -55,7 +55,6 @@ new Vue({
             this.rotation = 0;
             this.isGreyscale = false;
             this.isInverted = false;
-            
           });
         };
 
@@ -71,15 +70,15 @@ new Vue({
       let scaleFactor;
 
       if (imgRatio > canvasRatio) {
-        scaleFactor = (canvasWidth * 0.9) / this.image.width;
+        scaleFactor = (canvasWidth * 0.5) / this.image.width;
       } else {
-        scaleFactor = (canvasHeight * 0.9) / this.image.height;
+        scaleFactor = (canvasHeight * 0.5) / this.image.height;
       }
 
       this.image.scale(scaleFactor);
       this.image.set({
-        left: canvasWidth / 2,
-        top: canvasHeight / 2,
+        left: canvasWidth * 0.35,
+        top: canvasHeight * 0.35,
         originX: "center",
         originY: "center",
       });
@@ -157,17 +156,19 @@ new Vue({
       // Create a new canvas with only the image
       const tempCanvas = new fabric.Canvas(document.createElement("canvas"));
       tempCanvas.setDimensions({
-        width: this.image.width * this.image.scaleX,
-        height: this.image.height * this.image.scaleY,
+        width: this.canvas.getWidth(),
+        height: this.canvas.getHeight(),
       });
 
       // Clone the image with all its properties
       const clonedImage = fabric.util.object.clone(this.image);
       clonedImage.set({
-        left: tempCanvas.width / 2,
-        top: tempCanvas.height / 2,
+        left: tempCanvas.width * 0.5,
+        top: tempCanvas.height * 0.5,
         originX: "center",
         originY: "center",
+        scaleX: 0.35,
+        scaleY: 0.35
       });
 
       // Add the cloned image to the temporary canvas
