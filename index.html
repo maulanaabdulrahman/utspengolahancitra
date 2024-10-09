@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Processing Citra</title>
@@ -8,86 +8,88 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div id="app">
-      <div class="top-bar">
-        <div class="logo">Image Processing Citra</div>
-      </div>
-      <div class="main-content">
-        <div class="canvas-area">
-          <canvas id="canvas"></canvas>
+        <div class="top-bar">
+            <div class="logo">Image Processing Citra</div>
+            <button class="mobile-menu-toggle" @click="toggleControlsPanel">
+                <i class="fas fa-sliders-h"></i>
+            </button>
         </div>
-        <div class="controls-panel">
-          <div class="control-group">
-            <div class="upload-btn-wrapper">
-              <button class="btn">Upload an image</button>
-              <input type="file" @change="onFileChange" accept="image/*" />
+        <div class="main-content">
+            <div class="canvas-area">
+                <canvas id="canvas"></canvas>
             </div>
-            <button @click="resetImage" class="btn">Reset</button>
-            <button @click="downloadImage" class="btn">Download</button>
-          </div>
-          <div class="control-group">
-            <div class="control-title">Brightness</div>
-            <div class="slider-container">
-              <input
-                type="range"
-                v-model="brightness"
-                min="0"
-                max="200"
-                @input="applyBrightness"
-              />
-              <span class="slider-value">{{ brightness }}</span>
+            <div class="controls-panel" :class="{ 'mobile-open': isControlsPanelOpen }">
+                <div class="control-group">
+                    <div class="upload-btn-wrapper">
+                        <button class="btn">Upload an image</button>
+                        <input type="file" @change="onFileChange" accept="image/*" />
+                    </div>
+                    <button @click="resetImage" class="btn">Reset</button>
+                    <button @click="downloadImage" class="btn">Download</button>
+                </div>
+                <div class="control-group">
+                    <div class="control-title">Brightness</div>
+                    <div class="slider-container">
+                        <input
+                            type="range"
+                            v-model="brightness"
+                            min="0"
+                            max="200"
+                            @input="applyBrightness"
+                        />
+                        <span class="slider-value">{{ brightness }}</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-title">Rotation</div>
+                    <div class="slider-container">
+                        <input
+                            type="range"
+                            v-model="rotation"
+                            min="0"
+                            max="360"
+                            @input="applyRotation"
+                        />
+                        <span class="slider-value">{{ rotation }}°</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-title">Flip</div>
+                    <div class="flip-buttons">
+                        <button @click="applyFlip('horizontal')" class="flip-button">
+                            Horizontal
+                        </button>
+                        <button @click="applyFlip('vertical')" class="flip-button">
+                            Vertical
+                        </button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-title">Greyscale</div>
+                    <input
+                        type="checkbox"
+                        v-model="isGreyscale"
+                        @change="applyGreyscale"
+                    />
+                </div>
+                <div class="control-group">
+                    <div class="control-title">Invert Colors</div>
+                    <input type="checkbox" v-model="isInverted" @change="applyInvert" />
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <div class="control-title">Rotation</div>
-            <div class="slider-container">
-              <input
-                type="range"
-                v-model="rotation"
-                min="0"
-                max="360"
-                @input="applyRotation"
-              />
-              <span class="slider-value">{{ rotation }}°</span>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="control-title">Flip</div>
-            <div class="flip-buttons">
-              <button @click="applyFlip('horizontal')" class="flip-button">
-                Horizontal
-              </button>
-              <button @click="applyFlip('vertical')" class="flip-button">
-                Vertical
-              </button>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="control-title">Greyscale</div>
-            <input
-              type="checkbox"
-              v-model="isGreyscale"
-              @change="applyGreyscale"
-            />
-          </div>
-          <div class="control-group">
-            <div class="control-title">Invert Colors</div>
-            <input type="checkbox" v-model="isInverted" @change="applyInvert" />
-          </div>
         </div>
-      </div>
     </div>
-
     <script src="assets/js/script.js"></script>
-  </body>
+</body>
 </html>
