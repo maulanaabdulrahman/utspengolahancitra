@@ -7,6 +7,7 @@ new Vue({
     rotation: 0,
     isGreyscale: false,
     isInverted: false,
+    isControlsPanelOpen: false,
   },
   mounted() {
     this.initializeCanvas();
@@ -33,13 +34,13 @@ new Vue({
       const file = e.target.files[0];
       if (file) {
         const fileSizeMb = file.size / (1024 * 1024);
-        if(fileSizeMb > 1) {
+        if (fileSizeMb > 1) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Ukuran gambar maksimal adalah 1MB",
           });
-          return
+          return;
         }
         const reader = new FileReader();
         reader.onload = (f) => {
@@ -54,6 +55,7 @@ new Vue({
             this.rotation = 0;
             this.isGreyscale = false;
             this.isInverted = false;
+            
           });
         };
 
@@ -69,15 +71,15 @@ new Vue({
       let scaleFactor;
 
       if (imgRatio > canvasRatio) {
-        scaleFactor = (canvasWidth * 0.5) / this.image.width;
+        scaleFactor = (canvasWidth * 0.9) / this.image.width;
       } else {
-        scaleFactor = (canvasHeight * 0.5) / this.image.height;
+        scaleFactor = (canvasHeight * 0.9) / this.image.height;
       }
 
       this.image.scale(scaleFactor);
       this.image.set({
-        left: canvasWidth * 0.35,
-        top: canvasHeight * 0.35,
+        left: canvasWidth / 2,
+        top: canvasHeight / 2,
         originX: "center",
         originY: "center",
       });
@@ -153,12 +155,10 @@ new Vue({
       if (!this.image) return;
 
       // Create a new canvas with only the image
-      const tempCanvas = new fabric.Canvas(
-        document.createElement("canvas")
-      );
+      const tempCanvas = new fabric.Canvas(document.createElement("canvas"));
       tempCanvas.setDimensions({
-        width: this.canvas.getWidth(),
-        height: this.canvas.getHeight(),
+        width: this.image.width * this.image.scaleX,
+        height: this.image.height * this.image.scaleY,
       });
 
       // Clone the image with all its properties
@@ -177,6 +177,7 @@ new Vue({
       // Convert the canvas to a data URL
       const dataURL = tempCanvas.toDataURL({
         format: "png",
+        quality: 1,
       });
 
       // Create and trigger the download
@@ -189,6 +190,9 @@ new Vue({
 
       // Clean up
       tempCanvas.dispose();
+    },
+    toggleControlsPanel() {
+      this.isControlsPanelOpen = !this.isControlsPanelOpen;
     },
   },
 });
