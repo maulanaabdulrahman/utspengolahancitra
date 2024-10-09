@@ -250,7 +250,7 @@ input[type="checkbox"]:checked::before {
   }
 
   .controls-panel {
-    width: 100%;
+    width: 93%;
     height: 40vh;
     position: fixed;
     bottom: 0;
