@@ -32,6 +32,7 @@ new Vue({
     },
     onFileChange(e) {
       const file = e.target.files[0];
+      this.fileName = file.name.split(".").slice(0, -1).join(".");
       if (file) {
         const fileSizeMb = file.size / (1024 * 1024);
         if (fileSizeMb > 1) {
@@ -168,7 +169,7 @@ new Vue({
         originX: "center",
         originY: "center",
         scaleX: 0.35,
-        scaleY: 0.35
+        scaleY: 0.35,
       });
 
       // Add the cloned image to the temporary canvas
@@ -183,7 +184,7 @@ new Vue({
 
       // Create and trigger the download
       const link = document.createElement("a");
-      link.download = "edited_image.png";
+      link.download = `${this.fileName}-edit.png`;
       link.href = dataURL;
       document.body.appendChild(link);
       link.click();
